@@ -6,8 +6,8 @@ likes(esteban, malena).
 likes(malena, esteban).
 likes(gustavo, valeria).
 
-pairing(A, _):- chatty(A).
-pairing(_, A):- chatty(A).
+pairing(A, B):- chatty(A), A\=B.
+pairing(B, A):- chatty(A), A\=B.
 
 % La coma es como una Y
 pairing(A, B):- likes(A, B), likes(B, A).
