@@ -30,3 +30,15 @@ natural(N):- N > 1, N2 is N-1, natural(N2).
  A -> B
  B :- A.
 */
+
+
+/*
+Listas
+n0 = [], [_] < [_,_]
+
+Arbol
+nil,
+
+Grafo
+vacio
+*/
