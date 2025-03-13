@@ -49,7 +49,23 @@ my_Length([], 0).
 my_Length([_|Resto], N):- R is N-1, my_Length(Resto, R).
 
 
+/*
+comprime(Lista, R)
+ es cierto si R unifica con la lista si:
+ comprime([a,a,a,b,b,c,a,a], R).
+ R = [(a,3),(b,2),(c,1),(a,2)]
+ 
+*/
 
+
+/*
+elemento_enesimo(+Lista, +Pos, -Elem)
+  es cierto cuando Elem unifica con el elemento de la posición Pos en de Lista.
+
+*/
+
+elemento_enesimo([Cab|_], 1, Cab).
+elemento_enesimo([_|Resto], N, R):- N2 is N-1, elemento_enesimo(Resto, N2, R)
 
 
 
