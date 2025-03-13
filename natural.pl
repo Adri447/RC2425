@@ -1,3 +1,4 @@
+
 % Natural
 
 /*
@@ -33,9 +34,30 @@ natural(N):- N > 1, N2 is N-1, natural(N2).
 
 
 /*
-Listas
+Listas:
 n0 = [], [_] < [_,_]
 
+[Cabeza|Resto] = [1,2,3,4].
+Cabeza tiene el primero
+
+my_length(list, Num)
+ es cierto si Num unifica con el numero de elementos de List.
+ 
+*/
+
+my_Length([], 0).
+my_Length([Cab|Resto], N):- R is N-1, my_Length(Resto, R).
+
+
+
+
+
+
+
+
+
+
+/*
 Arbol
 nil,
 
