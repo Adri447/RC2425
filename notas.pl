@@ -65,7 +65,7 @@ elemento_enesimo(+Lista, +Pos, -Elem)
 */
 
 elemento_enesimo([Cab|_], 1, Cab).
-elemento_enesimo([_|Resto], N, R):- N2 is N-1, elemento_enesimo(Resto, N2, R)
+elemento_enesimo([_|Resto], N, R):- N > 1, N2 is N-1, elemento_enesimo(Resto, N2, R)
 
 
 
