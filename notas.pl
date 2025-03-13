@@ -46,7 +46,7 @@ my_length(list, Num)
 */
 
 my_Length([], 0).
-my_Length([Cab|Resto], N):- R is N-1, my_Length(Resto, R).
+my_Length([_|Resto], N):- R is N-1, my_Length(Resto, R).
 
 
 
