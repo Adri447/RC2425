@@ -32,9 +32,15 @@ my_reverse([Cab|Resto], R2):- my_reverse(Resto, R), append(R, [Cab], R2).
 
 
 /*
+my_append(?Lita1,?Lista2, ?Resultado)
+ es cierto si Resultado unifica con una lista que contiene los elemetos de Lista1 y Lista2.
+ 
 my_append([1,2,3],[4,5],R).
 R = [1,2,3,4,5]
 */
+
+my_append([],Lista,Lista).
+my_append([Cab|Resto],Lista, [Cab|R]):- my_append(Resto,Lista,R).
 
 
 /*
