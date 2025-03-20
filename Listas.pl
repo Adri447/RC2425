@@ -25,13 +25,16 @@ elemento_enesimo([_|Resto], N, R):- N > 1, N2 is N-1, elemento_enesimo(Resto, N2
 /*
 my_reverse(?List, ?ListR) 
   es cierto cuando ListR unifica con una lista que contiene los mismos elementos que List pero en orden inverso.
-
-append([1,2,3],[4,5],R).
-R = [1,2,3,4,5]
 */
 
 my_reverse([],[]).
 my_reverse([Cab|Resto], R2):- my_reverse(Resto, R), append(R, [Cab], R2).
+
+
+/*
+my_append([1,2,3],[4,5],R).
+R = [1,2,3,4,5]
+*/
 
 
 /*
