@@ -3,7 +3,7 @@ Listas:
 n0 = [], [_] < [_,_]
 
 [Cabeza|Resto] = [1,2,3,4].
-Cabeza tiene el primero
+Cabeza tiene el primero -> Cabeza = [1], Resto = [2,3,4]
 */
 
 /*
