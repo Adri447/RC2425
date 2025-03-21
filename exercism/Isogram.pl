@@ -16,10 +16,9 @@ quita_blancos(Lista, R).
 blanco(32).
 blanco(45).
 
+quita_blancos(String, R):-  exclude(blanco, Codes, R), string_lower(String, string), string_codes(string, Codes).
 
-isogram(String):- maplist(all_distinct(R)), exclude(blanco, Codes, R).
+isogram(String):- maplist(all_distinct(R)), quita_blancos(String, R).
 
-string_lower(String, string).
-string_codes(string, Codes).
 
 
