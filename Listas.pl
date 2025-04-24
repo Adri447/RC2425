@@ -39,8 +39,8 @@ my_append([1,2,3],[4,5],R).
 R = [1,2,3,4,5]
 */
 
-my_append([],Lista,Lista).
-my_append([Cab|Resto],Lista, [Cab|R]):- my_append(Resto,Lista,R).
+my_append([], Lista, Lista).
+my_append([Cab|Resto], Lista, [Cab|R]):- my_append(Resto, Lista, R).
 
 
 /*
@@ -49,6 +49,31 @@ comprime(Lista, R)
  comprime([a,a,a,b,b,c,a,a], R).
  R = [(a,3),(b,2),(c,1),(a,2)]
 */
+
+
+/* Ordenacion por iserción */
+ordena_insercion([],[]).
+ordena_insercion([Cab|Resto], R2):- ordena_insercion(Resto, R), inserta_en_list_ordenada(Cab, R, R2).
+
+inserta_en_list_ordenada(Elem, [], [Elem]).
+inserta_en_list_ordenada(Elem, [Cab|Resto], [Elem,Cab|Resto]):-  Elem =< Cab.
+inserta_en_list_ordenada(Elem, [Cab|Resto], [Cab|R]):-  Elem > Cab, inserta_en_list_ordenada(Elem, Resto, R).
+
+
+/* Ordenacion Quicksort */
+
+ordena_quick([],[]).
+ordena_quick([Cab|Resto], R):- divide(Cab, Resto, Men, May), ordena_quick(Men, RMen), ordena_quick(May, RMay), append(RMen, [Cab|RMay], R).
+
+divide(Pivote, [], [], []).
+divide(Pivote, [Cab|Resto], [Cab|RMen], RMay):- Pivote =< Cab, divide(Pivote, Resto, RMen, RMay).
+divide(Pivote, [Cab|Resto], RMen, [Cab|RMay]):- Pivote > Cab, divide(Pivote, Resto, RMen, RMay).
+
+
+
+
+
+
 
 
 
