@@ -54,8 +54,8 @@ del subarbol Izq y el subarbol Der sea como maximo 1.
 
 */
 
-
-
+balanceado(nil).
+balanceado(a(_, AI, AD)):- altura(AI, RI), altura(AD, RD), D is abs(RI - RD), D =< 1, balanceado(AI), balanceado(AD).
 
 
 /*
@@ -65,8 +65,7 @@ es cierto si A unifica con la altura de un arbol_binario.
 */
 
 altura(nil, 0).
-altura(a(_, AI, AD), A):- altura(AI, Ai), altura(AD, Ad), Ai > Ad, A is Ai + 1.
-altura(a(_, AI, AD), A):- altura(AI, Ai), altura(AD, Ad), Ai =< Ad, A is Ad + 1.
+altura(a(_, AI, AD), A):- altura(AI, Ai), altura(AD, Ad), Alt is max(Ai, Ad), A is Alt + 1.
 
 
 
