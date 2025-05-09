@@ -142,11 +142,20 @@ es cierto si arbol_generico unifica con un arbl_binario
 */
 
 bin2gen(a(E, nil, nil),a(E,[])).
-bin2gen(a(E, nil, AD),a(E,[AD])):- AD \= nil.
-bin2gen(a(E, AI, nil),a(E,[AI])):- AI \= nil.
+bin2gen(a(E, nil, AD),a(E,[AGD])):- AD \= nil, bin2gen(AD, AGD).
+bin2gen(a(E, AI, nil),a(E,[AGI])):- AI \= nil, bin2gen(AI, AGI)
 bin2gen(a(E, AI, AD),a(E,[AGI, AGD])):- bin2gen(AI, AGI), bin2gen(AD, AGD).
 
 
+/*
+anchura(Arbol_generico, Recorrido)
+es cierto si Recorrido unifica con las etiquetas del arbol recoridas en anchura
+
+*/
+
+anchura(a(E, ListaHijos), [E|R]):- anchura(ListaHijos, R).
+anchura([],[]).
+anchura([a(E, ListaHijos)|Resto], R2):- append(Resto, ListaHijos, R), anchura(R, R2).
 
 
 
