@@ -84,10 +84,9 @@ es cierto si Elem unifica es una etiqueta de un arbol_binario.
 
 */
 
-
 miembro(E, a(E, _, _)).
-miembro(Elem, a(E, AI, AD)):- Elem \= E, miembro(Elem, AI).
-miembro(Elem, a(E, AI, AD)):- Elem \= E, miembro(Elem, AD).
+miembro(Elem, a(_, AI, _)):- miembro(Elem, AI).
+miembro(Elem, a(_, _, AD)):- miembro(Elem, AD).
 
 
 
