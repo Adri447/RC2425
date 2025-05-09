@@ -21,7 +21,8 @@ arbol1(
         ).
         
 arbol2(
-        a(1, a(2, a(4, nil, nil), a(5, nil, nil)), a(3, a(6, nil, nil), a(7, a(8, nil, nil), nil)))
+        a(1, a(2, a(4, nil, nil), a(5, nil, nil)), 
+             a(3, a(6, nil, nil), a(7, a(8, nil, nil), nil)))
         ).
 
 /* 
@@ -132,6 +133,18 @@ cuenta_nodos(a(_, ListaHijos), R):- cuenta_nodos(ListaHijos, RLH), R is RLH + 1.
 
 cuenta_nodos([], 0).
 cuenta_nodos([Cab|Resto], ):- cuenta_nodos(Resto, RR), cuenta_nodos(Cab, RC), R is RR + RC
+
+
+/*
+bin2gen(Arbol_binario, Arbol_generico)
+es cierto si arbol_generico unifica con un arbl_binario
+
+*/
+
+bin2gen(a(E, nil, nil),a(E,[])).
+bin2gen(a(E, nil, AD),a(E,[AD])):- AD \= nil.
+bin2gen(a(E, AI, nil),a(E,[AI])):- AI \= nil.
+bin2gen(a(E, AI, AD),a(E,[AGI, AGD])):- bin2gen(AI, AGI), bin2gen(AD, AGD).
 
 
 
