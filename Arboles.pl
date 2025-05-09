@@ -113,6 +113,30 @@ postorden(a(E, AI, AD), R):- postorden(AI, RI), postorden(AD, RD), append([RI, R
 
 
 
+/*
+Arbol generico
+a(1,[a(2,[a(5,[])]), a(3,[]), a(4,[])])
+
+                1
+           /    |    \
+           2    3     4
+           |
+           5
+
+n0 = a(_,[]).
+
+*/
+
+/*
+cuenta_nodos(a(_, ListaHijos), R):- cuenta_nodos(ListaHijos, RLH), R is RLH + 1.
+
+
+*/
+
+cuenta_nodos([], 0).
+cuenta_nodos([Cab|Resto], ):- cuenta_nodos(Resto, RR), cuenta_nodos(Cab, RC), R is RR + RC
+
+
 
 
 
