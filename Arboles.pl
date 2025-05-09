@@ -155,7 +155,7 @@ es cierto si Recorrido unifica con las etiquetas del arbol recoridas en anchura
 
 anchura(a(E, ListaHijos), [E|R]):- anchura(ListaHijos, R).
 anchura([],[]).
-anchura([a(E, ListaHijos)|Resto], R2):- append(Resto, ListaHijos, R), anchura(R, R2).
+anchura([a(E, ListaHijos)|Resto], [E|R2]):- append(Resto, ListaHijos, R), anchura(R, R2).
 
 
 
