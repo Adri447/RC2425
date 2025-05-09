@@ -68,6 +68,27 @@ altura(nil, 0).
 altura(a(_, AI, AD), A):- altura(AI, Ai), altura(AD, Ad), Alt is max(Ai, Ad), A is Alt + 1.
 
 
+/*
+suma_nodos(Arbol_binario, R)
+es cierto si R unifica con la suma de todas las etiquetas de un arbol_binario.
+
+*/
+
+suma_nodos(nil, 0).
+suma_nodos(a(E, AI, AD), R):- suma_nodos(AI, RI), suma_nodos(AD, RD), R is RI + RD + E.
+
+
+/*
+miembro(Elem, Arbol_binario)
+es cierto si Elem unifica es una etiqueta de un arbol_binario.
+
+*/
+
+
+miembro(E, a(E, _, _)).
+miembro(Elem, a(E, AI, AD)):- Elem \= E, miembro(Elem, AI).
+miembro(Elem, a(E, AI, AD)):- Elem \= E, miembro(Elem, AD).
+
 
 
 
