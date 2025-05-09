@@ -89,6 +89,51 @@ miembro(Elem, a(_, AI, _)):- miembro(Elem, AI).
 miembro(Elem, a(_, _, AD)):- miembro(Elem, AD).
 
 
+/*
+Recorridos:
+inorden(Arbol_binario, Recorrido)
+es cierto si Recorrido unifica con las etiquetas del arbol recoridas en inorden
+
+preorden(Arbol_binario, Recorrido)
+es cierto si Recorrido unifica con las etiquetas del arbol recoridas en preorden
+
+postorden(Arbol_binario, Recorrido)
+es cierto si Recorrido unifica con las etiquetas del arbol recoridas en postorden
+
+*/
+
+inorden(nil, []).
+inorden(a(E, AI, AD), R):- inorden(AI, RI), inorden(AD, RD), append([RI, [E], RD], R).
+
+preorden(nil, []).
+preorden(a(E, AI, AD), R):- preorden(AI, RI), preorden(AD, RD), append([E|RI], RD, R).
+
+postorden(nil, []).
+postorden(a(E, AI, AD), R):- postorden(AI, RI), postorden(AD, RD), append([RI, RD, [E]], R).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
