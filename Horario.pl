@@ -92,6 +92,10 @@ class_subject_teacher_times('1a', lat, atvz1, 3).
    Labeling is performed on all slot variables.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+/*
+setof(formato, datos, resultado)  elimina duplicados
+setof(C, S^N^T^class_subject_teacher_times(C,S,T,N), Classes).  quita S,N,T de la solucion Classes
+*/
 
 requirements(Rs) :-
         Goal = class_subject_teacher_times(Class,Subject,Teacher,Number),
