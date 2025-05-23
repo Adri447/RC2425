@@ -94,7 +94,10 @@ class_subject_teacher_times('1a', lat, atvz1, 3).
 
 /*
 setof(formato, datos, resultado)  elimina duplicados
+bagof no elimina duplicados
 setof(C, S^N^T^class_subject_teacher_times(C,S,T,N), Classes).  quita S,N,T de la solucion Classes
+
+findAll() es igual a bagof y busca toda las soluciones
 */
 
 requirements(Rs) :-
