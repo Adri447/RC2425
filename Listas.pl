@@ -48,7 +48,19 @@ comprime(Lista, R)
  es cierto si R unifica con la lista si:
  comprime([a,a,a,b,b,c,a,a], R).
  R = [(a,3),(b,2),(c,1),(a,2)]
+ 
+cuenta_repetidos(Elem, Lista, N, Resto)
+ N es la cantidad de veces que Elem aparece al principio de Lista + 1
+ Resto es la lista que queda después de contar los repetidos
 */
+
+comprime([],[]).
+comprime([X|Xs], [(X,N)|R]):- cuenta_repetidos(X, Xs, N, Resto), comprime(Resto, R).
+
+cuenta_repetidos(_, [], 1, []).
+cuenta_repetidos(X, [X|Xs], N, Resto):- cuenta_repetidos(X, Xs, N1, Resto), N is N1 + 1.
+cuenta_repetidos(X, [Y|Ys], 1, [Y|Ys]):- X \= Y.
+
 
 
 /* Ordenacion por iserción */
