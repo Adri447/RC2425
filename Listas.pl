@@ -84,6 +84,24 @@ mas_veces([Cab|Resto], Elem, N):- mas_veces(Resto, Elem, N), Cab\=Elem.
 
 
 
+/*
+permuta(Lista, ListaR).
+ es cierto cuando ListaR unifica con una lista que contiene los elementos de Lista en orden
+ distinto. Este predicado genera todas las listas posibles por backtraking.
+
+selecciona_uno(+Lista, -Elem, -Resto)
+ es cierto cuando Elem unifica con cualquier elemento de la lista Lista y Resto unifica
+ con una lista que contiene los elementos de Lista, en el mismo orden menos el elemento Elem.
+*/
+
+permuta([],[]).
+permuta(Lista, [E|R]):- selecciona_uno(Lista, E, Resto), permuta(Resto, R).
+
+selecciona_uno([Cab|Resto], Cab, Resto).
+selecciona_uno([Cab|Resto], E, [Cab|R]):- selecciona_uno(Resto, E, R). 
+
+
+
 
 
 
