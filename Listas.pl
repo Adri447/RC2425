@@ -72,6 +72,21 @@ cuenta_repetidos(X, [X|Xs], N, Resto):- cuenta_repetidos(X, Xs, N1, Resto), N is
 cuenta_repetidos(X, [Y|Ys], 1, [Y|Ys]):- X \= Y.
 
 
+/*
+mas_veces(+Lista, -Elem, -Num)
+ es cierto cuando Elem unifica con el elemento que se repite más veces en la 
+ lista Lista y Num unifica con el número de veces que se repite dicho elemento.
+*/
+
+mas_veces([], _, 0).
+mas_veces([Elem|Resto], Elem, N2):- mas_veces(Resto, Elem, N), N2 is N + 1. 
+mas_veces([Cab|Resto], Elem, N):- mas_veces(Resto, Elem, N), Cab\=Elem. 
+
+
+
+
+
+
 
 /* Ordenacion por iserción */
 ordena_insercion([],[]).
