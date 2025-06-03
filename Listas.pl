@@ -32,6 +32,16 @@ my_reverse([Cab|Resto], R2):- my_reverse(Resto, R), append(R, [Cab], R2).
 
 
 /*
+aniadir_final(+Elem, +Lista, -ListaR) 
+cierto cuando ListaR unifica con una lista que contiene los mismos elementos que la lista Lista más 
+el elemento Elem añadido al final.
+*/
+
+aniadir_final(Elem,[],[Elem]).
+aniadir_final(Elem,Lista,R):- append(Lista, [Elem], R).
+
+
+/*
 my_append(?Lita1,?Lista2, ?Resultado)
  es cierto si Resultado unifica con una lista que contiene los elemetos de Lista1 y Lista2.
  
