@@ -42,9 +42,9 @@ cuenta_nodos(a(_, AI, AD), R):- cuenta_nodos(AI, RI), cuenta_nodos(AD, RD), R is
 
 lista_hojas(nil,[]).
 lista_hojas(a(E,nil,nil),[E]).
-lista_hojas(a(_, nil, HD), LD):- HD\=nil, lista_hojas(HD, LD). 
-lista_hojas(a(_, HI, nil), LI):- HI\=nil, lista_hojas(HI, LI).
-lista_hojas(a(_, HI, HD), L):- HI\=nil, HD\=nil, lista_hojas(HI,LI), lista_hojas(HD,LD), append(LI,LD,L).
+lista_hojas(a(_, HI, HD), L):- \+ hoja(a(_, HI, HD)), lista_hojas(HI,LI), lista_hojas(HD,LD), append(LI,LD,L).
+
+hoja(a(_,nil,nil)).
 
 
 
@@ -150,6 +150,15 @@ cuenta_nodos([], 0).
 cuenta_nodos([Cab|Resto], R):- cuenta_nodos(Resto, RR), cuenta_nodos(Cab, RC), R is RR + RC
 
 
+/*
+construye_arbol_generico(Lista, arbolG)
+ es cierto si arbolG unifica con un arbol generico que contiene todas las etiquetas de Lista
+*/
+
+construye_arbole_generico([Cab|Resto], a(Cab, R)):- construye_lista_arboles_generico(Resto, R).
+
+construye_lista_arboles_generico([], []).
+construye_lista_arboles_generico([Cab|Resto], [a(Cab,[])|R]):- construye_lista_arboles_generico(Resto, R).
 
 
 /*
@@ -188,6 +197,8 @@ es cierto si Recorrido unifica con las etiquetas del arbol recoridas en anchura
 anchura(a(E, ListaHijos), [E|R]):- anchura(ListaHijos, R).
 anchura([],[]).
 anchura([a(E, ListaHijos)|Resto], [E|R2]):- append(Resto, ListaHijos, R), anchura(R, R2).
+
+
 
 
 
