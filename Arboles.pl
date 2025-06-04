@@ -34,6 +34,20 @@ numero de nodos del árbol "Arbol_binario"
 cuenta_nodos(nil, 0).
 cuenta_nodos(a(_, AI, AD), R):- cuenta_nodos(AI, RI), cuenta_nodos(AD, RD), R is RI + RD + 1.
 
+
+/* lista_hojas(+Arbol_binario, ?Lista_hojas)
+ es cierto cuando Lista_hojas unifica con una lista que contiene 
+ las etiquetas de las hojas del árbol “Arbol_binario”
+*/
+
+lista_hojas(nil,[]).
+lista_hojas(a(E,nil,nil),[E]).
+lista_hojas(a(_, nil, HD), LD):- HD\=nil, lista_hojas(HD, LD). 
+lista_hojas(a(_, HI, nil), LI):- HI\=nil, lista_hojas(HI, LI).
+lista_hojas(a(_, HI, HD), L):- HI\=nil, HD\=nil, lista_hojas(HI,LI), lista_hojas(HD,LD), append(LI,LD,L).
+
+
+
 /*
 crea_arbol(Lista. Arbol_binario)
 es cierto cuando Arbol_binario unifica con un arbol binerio balanceado
