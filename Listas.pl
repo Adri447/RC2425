@@ -37,8 +37,8 @@ cierto cuando ListaR unifica con una lista que contiene los mismos elementos que
 el elemento Elem añadido al final.
 */
 
-aniadir_final(Elem,[],[Elem]).
-aniadir_final(Elem,Lista,R):- append(Lista, [Elem], R).
+aniadir_final(Elem, [], [Elem]).
+aniadir_final(Elem, Lista, R):- append(Lista, [Elem], R).
 
 
 /*
@@ -53,34 +53,42 @@ my_append([], Lista, Lista).
 my_append([Cab|Resto], Lista, [Cab|R]):- my_append(Resto, Lista, R).
 
 
-/*
-comprime(Lista, R)
- es cierto si R unifica con la lista si:
- comprime([a,a,a,b,b,c,a,a], R).
- R = [(a,3),(b,2),(c,1),(a,2)]
- 
-cuenta_repetidos(Elem, Lista, N, Resto)
- N es la cantidad de veces que Elem aparece al principio de Lista + 1
- Resto es la lista que queda después de contar los repetidos
-*/
-
-comprime([],[]).
-comprime([X|Xs], [(X,N)|R]):- cuenta_repetidos(X, Xs, N, Resto), comprime(Resto, R).
-
-cuenta_repetidos(_, [], 1, []).
-cuenta_repetidos(X, [X|Xs], N, Resto):- cuenta_repetidos(X, Xs, N1, Resto), N is N1 + 1.
-cuenta_repetidos(X, [Y|Ys], 1, [Y|Ys]):- X \= Y.
-
 
 /*
 mas_veces(+Lista, -Elem, -Num)
  es cierto cuando Elem unifica con el elemento que se repite más veces en la 
  lista Lista y Num unifica con el número de veces que se repite dicho elemento.
+
+1) Ordeno
+2) Comprime
+3) maximo
 */
 
-mas_veces([], _, 0).
-mas_veces([Elem|Resto], Elem, N2):- mas_veces(Resto, Elem, N), N2 is N + 1. 
-mas_veces([Cab|Resto], Elem, N):- mas_veces(Resto, Elem, N), Cab\=Elem. 
+mas_veces(Lista, E, N):- msort(Lista, L), comprime(L, R), maximo(R, E, N).
+
+/*
+comprime(Lista, R)
+ es cierto si R unifica con la lista que contiene los elementos de Lista con el siguiente formato:
+ comprime([a,a,a,b,b,c,a,a], R).
+ R = [(a,3),(b,2),(c,1),(a,2)]
+*/
+
+comprime([],[]).
+comprime([E], [(E,1)]).
+comprime([C1,C1|Resto], [(C1,N2)|R]):- comprime([C1|Resto], [(C1,N)|R]), N2 is N + 1.
+comprime([C1,C2|Resto], [(C1,1)|R]):- C1\=C2, comprime([C2|Resto], R).
+
+
+/*
+maximo(Lista, E, N)
+ es cierto si E unifica con el elemento de Lista que se repite mas veces y N el numero de veces que se repite,
+ conteniendo L una Lista de tuplas con los elementos y el numero de veces que se repite. Si la lista es vacia N vale -1
+*/
+
+maximo([], _, -1).
+maximo([(Cab,N)|Resto], Cab, N):- maximo(Resto, Emayor, Nmayor), N > Nmayor.
+maximo([(Cab,N)|Resto], Emayor, Nmayor):- maximo(Resto, Emayor, Nmayor), N =< Nmayor.
+
 
 
 
