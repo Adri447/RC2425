@@ -105,6 +105,14 @@ miembro(Elem, a(_, _, AD)):- miembro(Elem, AD).
 
 
 /*
+iguales(A1, A2)
+ es cierto si los arboles binerios/genericos son iguales
+*/
+
+iguales(A,A).
+
+
+/*
 Recorridos:
 inorden(Arbol_binario, Recorrido)
 es cierto si Recorrido unifica con las etiquetas del arbol recoridas en inorden
