@@ -142,11 +142,29 @@ n0 = a(_,[]).
 
 */
 
+dato(a(a,[a(f,[a(g,[])]),a(c,[]),a(b,[a(d,[]),a(e,[])])])).
 
 cuenta_nodos(a(_, ListaHijos), R):- cuenta_nodos(ListaHijos, RLH), R is RLH + 1.
 
 cuenta_nodos([], 0).
 cuenta_nodos([Cab|Resto], ):- cuenta_nodos(Resto, RR), cuenta_nodos(Cab, RC), R is RR + RC
+
+
+
+
+/*
+profundidad_ag(+Arbol_generico, ?P)
+ es cierto cuando P unifica con la profundidad del
+ árbol genérico “Arbol_genérico”
+*/
+
+profundidad_ag(a(_,ListaHijos), N):- profundidad_ag(ListaHijos, R), N is R + 1.
+
+
+profundidad_ag([],0).
+profundidad_ag([Cab|Resto], PR):- profundidad_ag(Cab, PC), profundidad_ag(Resto, PR), PC =< PR.
+profundidad_ag([Cab|Resto], PC):- profundidad_ag(Cab, PC), profundidad_ag(Resto, PR), PC > PR.
+
 
 
 /*
