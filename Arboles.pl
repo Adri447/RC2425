@@ -27,12 +27,39 @@ arbol2(
 
 /* 
 cuenta_nodos(+Arbol_binario, ?Num_nodos)
-es cierto cuando Num_nodos unifica con el
-numero de nodos del árbol "Arbol_binario" 
+es cierto cuando Num_nodos unifica con el numero de nodos del árbol Arbol_binario 
 */
 
 cuenta_nodos(nil, 0).
 cuenta_nodos(a(_, AI, AD), R):- cuenta_nodos(AI, RI), cuenta_nodos(AD, RD), R is RI + RD + 1.
+
+
+/* 
+cuenta_internos(+Arbol_binario, ?Num_internos)
+es cierto cuando Num_internos unifica con el numero de nodos internos del árbol Arbol_binario 
+*/
+
+cuenta_internos(a(_, AI, AD), 0):- hoja(a(_,AI,AD)).
+cuenta_internos(a(_, AI, nil), R):- AI \= nil, cuenta_internos(AI, RI), R is RI + 1.
+cuenta_internos(a(_, nil, AD), R):- AD \= nil, cuenta_internos(AD, RD), R is RD + 1.
+cuenta_internos(a(_, AI, AD), R):- \+ hoja(a(_, AI, AD)), cuenta_internos(AI, RI), cuenta_internos(AD, RD), R is RI + RD + 1.
+
+hoja(a(_,nil,nil)).
+
+
+
+/* 
+cuenta_hojas(+Arbol_binario, ?Num_hojas)
+es cierto cuando Num_hojas unifica con el numero de nodos hoja del árbol Arbol_binario 
+*/
+
+cuenta_hojas(a(_, AI, AD), 1):- hoja(a(_,AI,AD)).
+cuenta_hojas(a(_, AI, nil), RI):- AI \= nil, cuenta_hojas(AI, RI).
+cuenta_hojas(a(_, nil, AD), RD):- AD \= nil, cuenta_hojas(AD, RD).
+cuenta_hojas(a(_, AI, AD), R):- \+ hoja(a(_, AI, AD)), cuenta_hojas(AI, RI), cuenta_hojas(AD, RD), R is RI + RD.
+
+hoja(a(_,nil,nil)).
+
 
 
 /* lista_hojas(+Arbol_binario, ?Lista_hojas)
@@ -136,8 +163,14 @@ postorden(a(E, AI, AD), R):- postorden(AI, RI), postorden(AD, RD), append([RI, R
 
 
 
+/*
+insertar(E, A, NA)
+inserta el elemento E en el árbol A, retornando el nuevo árbol en NA
+*/
 
-
+insertar(E, nil, a(E, nil, nil)).
+insertar(E, a(C, AI, AD), a(C, AI, RD)):- E > C, insertar(E, AD, RD).
+insertar(E, a(C, AI, AD), a(C, RI, AD)):- E =< C, insertar(E, AI, RI).
 
 
 
