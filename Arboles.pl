@@ -136,6 +136,21 @@ postorden(a(E, AI, AD), R):- postorden(AI, RI), postorden(AD, RD), append([RI, R
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 Arbol generico
 a(1,[a(2,[a(5,[])]), a(3,[]), a(4,[])])
@@ -163,7 +178,7 @@ construye_arbol_generico(Lista, arbolG)
  es cierto si arbolG unifica con un arbol generico que contiene todas las etiquetas de Lista
 */
 
-construye_arbole_generico([Cab|Resto], a(Cab, R)):- construye_lista_arboles_generico(Resto, R).
+construye_arbol_generico([Cab|Resto], a(Cab, R)):- construye_lista_arboles_generico(Resto, R).
 
 construye_lista_arboles_generico([], []).
 construye_lista_arboles_generico([Cab|Resto], [a(Cab,[])|R]):- construye_lista_arboles_generico(Resto, R).
