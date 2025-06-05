@@ -42,7 +42,7 @@ aniadir_final(Elem, Lista, R):- append(Lista, [Elem], R).
 
 
 /*
-my_append(?Lita1,?Lista2, ?Resultado)
+my_append(?Lita1, ?Lista2, ?Resultado)
  es cierto si Resultado unifica con una lista que contiene los elemetos de Lista1 y Lista2.
  
 my_append([1,2,3],[4,5],R).
@@ -111,6 +111,30 @@ selecciona_uno([Cab|Resto], E, [Cab|R]):- selecciona_uno(Resto, E, R).
 
 
 
+/* primosEntrexy(+X, +Y, -ListaR)
+ es cierto cuando ListaR unifica con una lista que contiene a los primos que van desde X hasta
+ Y ambos incluidos en orden ascendente.
+*/
+
+primosEntrexy(X,X,[]).
+primosEntrexy(X,Y, [X|R]):- X<Y, X2 is X+1, primosEntrexy(X2,Y, R), primo(X).
+primosEntrexy(X,Y, R):- X<Y, X2 is X+1, primosEntrexy(X2, Y, R), \+ primo(X).
+
+
+/* primo(X)
+   es cierto si X unifica con un número primo.
+*/
+primo(X):- lista_divisores(X,X,[X,1]).
+
+
+/* lista_divisores(+X, +Y, -ListaR).
+ es cierto cuando ListaR unifica con una lista que contiene a los números cuyo resto
+ de la división entera de X entre Z es igual a 0 para valores de Z entre 1 e Y.
+*/
+lista_divisores(_, 1, [1]).
+lista_divisores(X, Y, [Y|R]):- Y > 1, Y2 is Y-1, lista_divisores(X, Y2, R), 0 is X mod Y.
+lista_divisores(X, Y, R):- Y > 1, Y2 is Y-1, lista_divisores(X,Y2, R), Z is X mod Y, Z \== 0.
+
 
 
 
@@ -123,14 +147,25 @@ inserta_en_list_ordenada(Elem, [Cab|Resto], [Elem,Cab|Resto]):-  Elem =< Cab.
 inserta_en_list_ordenada(Elem, [Cab|Resto], [Cab|R]):-  Elem > Cab, inserta_en_list_ordenada(Elem, Resto, R).
 
 
+
+/* Ordenacion por burbuja (pillar elementos consecutivos)*/
+ordena_burbuja(Lista, Lista):- ordenada(Lista).
+ordena_burbuja(Lista, R2):- append(L1, [E1,E2|L2], Lista), E1 > E2, append(L1, [E2,E1|L2], R), ordena_burbuja(R, R2).
+ordena_burbuja(Lista, R2):- append(L1, [E1,E2|L2], Lista), E1 =< E2, append(L1, [E1,E2|L2], R), ordena_burbuja(R, R2).
+
+ordenada([]).
+ordenada([_]).
+ordenada([C1,C2|Resto]):- C1 =< C2, ordenada([C2|Resto]).
+
+
 /* Ordenacion Quicksort */
-
 ordena_quick([],[]).
-ordena_quick([Cab|Resto], R):- divide(Cab, Resto, Men, May), ordena_quick(Men, RMen), ordena_quick(May, RMay), append(RMen, [Cab|RMay], R).
+ordena_quick([Cab|Resto], R):- divide(Cab, Resto, Men, May), ordena_quick(Men, RMen), 
+                               ordena_quick(May, RMay), append(RMen, [Cab|RMay], R).
 
-divide(Pivote, [], [], []).
-divide(Pivote, [Cab|Resto], [Cab|RMen], RMay):- Pivote =< Cab, divide(Pivote, Resto, RMen, RMay).
-divide(Pivote, [Cab|Resto], RMen, [Cab|RMay]):- Pivote > Cab, divide(Pivote, Resto, RMen, RMay).
+divide(_, [], [], []).
+divide(Pivote, [Cab|Resto], [Cab|RMen], RMay):- Cab =< Pivote, divide(Pivote, Resto, RMen, RMay).
+divide(Pivote, [Cab|Resto], RMen, [Cab|RMay]):- Cab > Pivote, divide(Pivote, Resto, RMen, RMay).
 
 
 
