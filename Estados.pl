@@ -39,7 +39,7 @@ camino(Ei, Ef, Visitados, Camino)
 
 camino(Ei, Ei, _, []).
 camino(Ei, Ef, Visitados, [Mov|Camino]):- 
-  length(Visitados, L), L < 10,
+  length(Visitados, L), L < 7,
   mov(Mov, Ei, TMP), 
   \+ member(TMP, Visitados),
   camino(TMP, Ef, [TMP|Visitados], Camino).
@@ -68,6 +68,7 @@ Problemas de estados
 4. Camino desde estado inicial al final
 */
 
+set_prolog_flag(answer_write_options, [max_depth(0)]).
 
 /* estado(Canibales_izq, Misioneros_izq, Pos_barca) */
 inicial(estado(3,3,izq)).
@@ -106,6 +107,8 @@ mov(pasar(M, C, dch), estado(MI, CI, izq), estado(MD, CD, dch)):-
  NT is M + C, NT =< 2, NT >= 1,
  M =< MI, C =< CI,
  MD is MI -M, CD is CI - C.
+
+ 
  
 /* camino(+Estado_inicial, +Estado_final, +Visitados, -Camino)
   es cierto cuando Estado_inicial y Estado_final unifican con estados válido, Visitados unifica con una lista
