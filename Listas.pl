@@ -22,6 +22,16 @@ elemento_enesimo(+Lista, +Pos, -Elem)
 elemento_enesimo([Cab|_], 1, Cab).
 elemento_enesimo([_|Resto], N, R):- N > 1, N2 is N-1, elemento_enesimo(Resto, N2, R).
 
+
+/*
+pertenece(+Elem, +Lista)
+  es cierto si Elem pertenece a Lista
+*/
+
+pertenece(Elem, [Elem|_]).
+pertenece(Elem, [_|Resto]):- pertenece(Elem, Resto).
+
+
 /*
 my_reverse(?List, ?ListR) 
   es cierto cuando ListR unifica con una lista que contiene los mismos elementos que List pero en orden inverso.
@@ -107,16 +117,10 @@ permuta(Lista, ListaR).
  es cierto cuando ListaR unifica con una lista que contiene los elementos de Lista en orden
  distinto. Este predicado genera todas las listas posibles por backtraking.
 
-selecciona_uno(+Lista, -Elem, -Resto)
- es cierto cuando Elem unifica con cualquier elemento de la lista Lista y Resto unifica
- con una lista que contiene los elementos de Lista, en el mismo orden menos el elemento Elem.
 */
 
-permuta([],[]).
-permuta(Lista, [E|R]):- selecciona_uno(Lista, E, Resto), permuta(Resto, R).
-
-selecciona_uno([Cab|Resto], Cab, Resto).
-selecciona_uno([Cab|Resto], E, [Cab|R]):- selecciona_uno(Resto, E, R). 
+permutar([], []).
+permutar([Cab|Resto], R2):- permutar(Resto, R), append(L1, L2, R), append(L1, [Cab|L2], R2).
 
 
 
