@@ -73,6 +73,20 @@ mezclar_ord([Cab1|Resto1],[Cab2|Resto2], [Cab1,Cab2|R]):- Cab1 =< Cab2, mezclar_
 mezclar_ord([Cab1|Resto1],[Cab2|Resto2], [Cab2,Cab1|R]):- Cab1 > Cab2, mezclar_ord(Resto1,Resto2,R).
 
 
+/*
+Eimina cada N
+elimina_n(+Lista, +N, -R)
+  es cierto si R unifica con una lista que contine
+  los elementos de Lista eliminando los que ocupan
+  posiciones múltiplos de N
+  
+  ? elimina_n([1,2,3,4,5,6,7,8,9], 3, R).
+  R = [1,2,4,5,7,8]
+*/
+
+elimina_n(Lista, N, Lista):- length(Lista, L), L < N.
+elimina_n(Lista, N, R2):- N2 is N-1, length(L1, N2), append(L1, [_|L2], Lista), elimina_n(L2, N, R), append(L1, R, R2).
+
 
 /*
 mas_veces(+Lista, -Elem, -Num)
