@@ -53,6 +53,16 @@ my_append([], Lista, Lista).
 my_append([Cab|Resto], Lista, [Cab|R]):- my_append(Resto, Lista, R).
 
 
+/*
+mezclar_ord(+L1, +L2, -Resul)
+es cierto cuando lista Resul contiene la mezcla de los elementos de las dos listas L1 y L2, y es también una lista ordenada.
+*/
+
+mezclar_ord([],[],[]).
+mezclar_ord([Cab1|Resto1],[Cab2|Resto2], [Cab1,Cab2|R]):- Cab1 =< Cab2, mezclar_ord(Resto1,Resto2,R).
+mezclar_ord([Cab1|Resto1],[Cab2|Resto2], [Cab2,Cab1|R]):- Cab1 > Cab2, mezclar_ord(Resto1,Resto2,R).
+
+
 
 /*
 mas_veces(+Lista, -Elem, -Num)
