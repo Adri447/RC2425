@@ -1,11 +1,11 @@
 /*
 
 sudoku(Matrix).
-  es cierto si Matrix unifica con una matriz 9x9 casillas,  /*16*/
-  con los números del 1 al 9,  /*17*/
-  dividido en 9 bloques de 3x3 casillas, /*21*/
-  con números distintos or fila, /*18*/
-  columnas /*20*/
+  es cierto si Matrix unifica con una matriz 9x9 casillas,      16
+  con los números del 1 al 9,                                   17
+  dividido en 9 bloques de 3x3 casillas,                        21
+  con números distintos or fila,                                18
+  columnas                                                      20
   y por cada bloque 3x3
 
 */
