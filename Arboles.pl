@@ -207,6 +207,23 @@ cuenta_nodos([Cab|Resto], R):- cuenta_nodos(Resto, RR), cuenta_nodos(Cab, RC), R
 
 
 /*
+lista_hojas_ag(+ArbolGenerico, ?Lista_hojas)
+es cierto cuando Lista_hojas unifica con una lista que contiene las etiquetas de las hojas del ArbolGenerico
+*/
+
+hoja_ag(a(_, [])).
+etiqueta(a(Et, _), Et).
+lista_hijos(a(_,LH), LH). 
+
+lista_hojas_ag(A, [Et]):- hoja_ag(A), etiqueta(A, Et).
+lista_hojas_ag(A, R):- \+ hoja_ag(A), lista_hijos(A, ListaHijos), lista_hojas(ListaHijos, R).
+  
+lista_hojas([], []).
+lista_hojas([Cab|Resto], R):- lista_hojas_ag(Cab, RCa), lista_hojas(Resto, RR), append(RCa, RR, R).
+
+    
+
+/*
 construye_arbol_generico(Lista, arbolG)
  es cierto si arbolG unifica con un arbol generico que contiene todas las etiquetas de Lista
 */
