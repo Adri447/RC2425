@@ -101,20 +101,21 @@ camino(g(Vertices, Aristas), Ini, Fin, Visitados, [a(Ini,TMP)|Camino]):-
   conectado(g(Vertices, Aristas), Ini, TMP),
   \+ member(a(Ini,TMP), Visitados),
   camino(g(Vertices, Aristas), TMP, Fin, [a(Ini,TMP),a(TMP,Ini)|Visitados], Camino).
+  
 
 
-/*
-Supongo que el grafo es dirigido, el camino es una lista de vertices y los isitados es una lista de aristas
-*/
 
-camindo(_, Ini, Ini, _, [Ini]).
-camino(grafo(V, A), Ini, Fin, Visitados, [Ini|Camino]):-
-  conectado(Ini, TMP, A),
-  \+ member(a(Ini,TMP), Visitados),
-  camino(grafo(V, A), TMP, Fin, [a(Ini,TMP)|Visitados], Camino).
+/*Dirigido, camino vertices, visitados aristas, n0 -> conectado(Ini,Fin)*/
 
-ciclo(grafo(V, A), Ciclo):- member(Vertice, V), camino(grafo(V, A), Vertice, Vertice, [], Ciclo), length(Ciclo, L), L > 1.
-ciclos(G, R):- bagof(C, ciclo(G, C), R).
+camino(G, Ini, Fin, _, [Ini,Fin]):- conectado(G, Ini, Fin).
+camino(g(V,A), Ini, Fin, Visitados, [Ini|Camino]):-
+  			conectado(g(V,A), Ini, Tmp), 
+ 			\+ member(a(Ini,Tmp), Visitados), 
+  			camino(g(V,A), Tmp, Fin, [a(Ini,Tmp)|Visitados], Camino).
+  
+/*CICLOS*/
+ciclos(g(V,A), R):- bagof(Ciclo, ciclo(g(V,A), Ciclo), R). 
+ciclo(g(V,A), Ciclo):- member(Vertice, V), camino(g(V,A), Vertice, Vertice, [], Ciclo). 
 
 
 
